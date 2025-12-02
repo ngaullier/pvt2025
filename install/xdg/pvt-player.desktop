@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=PVT Player
+GenericName=PVT Player
+Icon=media-playback-start
+TryExec=pvt_player-ui
+Exec=pvt_player-ui
+Terminal=false
+Categories=Video;Player;TV;
+Keywords=mpv;media;player;video;tv;
+StartupWMClass=pvt_player-ui.glade
+

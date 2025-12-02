@@ -1,0 +1,21 @@
+#! /usr/bin/env bash
+
+exit_fail ()
+{
+    zenity --error --title="${0##*/}" --text="$*"
+    exit 1
+}
+
+for input in "$@"
+do
+    dump="${input}_es-dump.txt"
+    frames="${input}_es-frames.txt"
+
+    ffmpeg -y -hide_banner -nostats -i "${input}" \
+        -map v:0 -c copy -bsf "filter_units=remove_types=39,trace_headers" -t 5 -f null /dev/null \
+        -map v:0 -c copy -t 10 -time_base 1/25 -f framecrc "${frames}" \
+        2>"${dump}" \
+        || exit_fail "$(basename "${input}"): FFmpeg failed"
+    sed -i 's/^\[trace_headers [^]]*] [0-9]*  *//g' "${dump}"
+    sed -i 's/^\[trace_headers [^]]*] //g'          "${dump}"
+done

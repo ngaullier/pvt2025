@@ -1,0 +1,21 @@
+#! /usr/bin/env bash
+
+input="$1"
+codec="$2"
+output="${input}_${codec}.mp4"
+
+ffpreset=( -g "50" -keyint_min "50" -b:v "3M" -bufsize "3M" )
+
+ffcmd=( ffmpeg -hide_banner -y -benchmark -i "${input}" -map v )
+
+case ${codec} in
+    *vaapi)
+        ffcmd+=( -init_hw_device "vaapi" -vf "format=nv12,hwupload" )
+        ;;
+    *)
+        ffcmd+=( -vf "format=yuv420p" )
+        ;;
+esac
+
+ffcmd+=( "${ffpreset[@]}" -c "${codec}" "${output}" )
+"${ffcmd[@]}"

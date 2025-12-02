@@ -1,0 +1,22 @@
+#! /usr/bin/env bash
+
+exit_fail ()
+{
+    zenity --error --title="${0##*/}" --text="$*"
+    exit 1
+}
+
+outdir="$( dirname "$1" )"
+plotcmd=( "/srv/vmafstat/plotvmaf.R" -f )
+ids=()
+
+for input in "$@"
+do
+    root="${input/_vmaf.json}"
+    ids+=( "${root##*_}" )
+
+    plotcmd+=( -i "${input}" )
+done
+plotcmd+=( -o "${outdir}/plot ${ids[*]}.html" )
+
+"${plotcmd[@]}"

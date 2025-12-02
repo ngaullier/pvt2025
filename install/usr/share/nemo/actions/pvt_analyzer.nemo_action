@@ -1,0 +1,8 @@
+[Nemo Action]
+Name=PVT analyzer  🔎
+Exec=<action_scripts/pvt_analyzer %F>
+Selection=notnone
+Extensions=ts;mp4;mov;mxf;mpg;m2v;h264;hevc;obu;
+Quote=double
+Dependencies=ffmpeg;
+UriScheme=file

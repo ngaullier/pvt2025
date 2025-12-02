@@ -1,0 +1,8 @@
+[Nemo Action]
+Name=PVT player-ui  📺
+Exec=pvt_player-ui %F
+Selection=3
+Extensions=ts;mp4;mov;mxf;mpg;m2v;h264;hevc;obu;
+Quote=double
+Dependencies=mpv;
+UriScheme=file

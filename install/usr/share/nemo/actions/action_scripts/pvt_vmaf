@@ -1,0 +1,16 @@
+#! /usr/bin/env bash
+
+exit_fail ()
+{
+    zenity --error --title="${0##*/}" --text="$*"
+    exit 1
+}
+
+file_ref="$1"
+file_enc="$2"
+
+name="${file_enc##*/}"
+id="${name%.*}"
+json_out="$(dirname "${file_enc}")"/"${id}_vmaf.json"
+
+/srv/vmafstat/ffvmaf -r "${file_ref}" -i "${file_enc}" -o "${json_out}"

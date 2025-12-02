@@ -1,0 +1,8 @@
+[Nemo Action]
+Name=PVT plotvmaf  📈
+Exec=<action_scripts/pvt_plotvmaf %F>
+Selection=notnone
+Extensions=json;
+Quote=double
+Dependencies=Rscript;
+UriScheme=file

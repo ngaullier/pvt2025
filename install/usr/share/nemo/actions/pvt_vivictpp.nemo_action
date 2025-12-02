@@ -1,0 +1,8 @@
+[Nemo Action]
+Name=PVT vivictpp  👓
+Exec=vivictpp %F
+Selection=2
+Extensions=ts;mp4;mov;mxf
+Quote=double
+Dependencies=vivictpp;
+UriScheme=file

@@ -1,0 +1,8 @@
+#! /usr/bin/env bash
+
+for c in hevc_vaapi libkvazaar libx265; do
+    for x in bateau brebis fete train; do
+        ./encode "media/${x}.mp4" "${c}"
+        /usr/share/nemo/actions/action_scripts/pvt_vmaf "media/${x}.mp4" "media/${x}.mp4_${c}.mp4"
+    done
+done

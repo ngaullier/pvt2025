@@ -1,0 +1,8 @@
+[Nemo Action]
+Name=PVT vmaf-ize  👁
+Exec=<action_scripts/pvt_vmaf %F>
+Selection=2
+Extensions=ts;mp4;mov;mxf
+Quote=double
+Dependencies=ffmpeg;
+UriScheme=file

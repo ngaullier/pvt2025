@@ -1,0 +1,36 @@
+#! /usr/bin/env bash
+
+set -o errexit
+set -o nounset
+
+#{{{ parse_args
+parse_args() {
+    local stow_ops xdg_ops
+    declare -A stow_ops=(\
+    [install]="--stow" \
+    [uninstall]="--delete" \
+    )
+    declare -A xdg_ops=(\
+    [install]="install" \
+    [uninstall]="uninstall" \
+    )
+
+    if [[ $# != 1 || ! ${stow_ops[$1]+_} ]]; then
+        echo "Parameter expected: ${!stow_ops[*]}"
+        exit 1
+    fi
+    stow_op="${stow_ops[$1]}"
+    xdg_op="${xdg_ops[$1]}"
+}
+#}}}
+
+#{{{ setup
+setup() {
+    stow --target="/usr" --verbose=1 "${stow_op}" "usr"
+
+    xdg-desktop-menu "${xdg_op}" "xdg/pvt-tools.directory" "xdg"/*.desktop
+}
+#}}}
+
+parse_args "$@"
+setup
