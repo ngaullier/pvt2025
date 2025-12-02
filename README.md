@@ -100,7 +100,7 @@ Comparaison des dumps avec `meld`.
 Boîte à outil [vmafstat](https://github.com/ngaullier/vmafstat).
 
 ```bash
-git clone https://git.inf.tvvideoms.com/ngaullie/vmafstat.git
+git clone https://github.com/ngaullier/vmafstat
 cd vmafstat
 ./install
 ```
