@@ -42,9 +42,6 @@ local function initializeIfNeeded()
     -- Settings suitable for trimming
     mp.commandv("script-message", "osc-visibility", "always")
     mp.set_property("pause", "yes")
-    if isVideoFile then
-        mp.set_property("hr-seek", "no")
-    end
     mp.set_property("options/keep-open", "always")
     mp.register_event("eof-reached", function()
         msg.log("info", "Playback Reached End of File")
@@ -106,12 +103,6 @@ local function initializeIfNeeded()
         mp.add_forced_key_binding("shift+DOWN", "-0.5_seconds", function()
             seekBySeconds(-0.5)
         end, {repeatable = true})
-
-        -- Seek to Default Trim Positions
-        if isVideoFile then
-            seekByKeyframes(-0.1)
-            seekByKeyframes(0.1)
-        end
     else
         -- Seeking by Seconds
         local function seekBySeconds(amount)
@@ -247,12 +238,6 @@ end
 
 function setStartPosition()
     initializeIfNeeded()
-
-    if isVideoFile then
-        -- Make sure current time-pos is a keyframes
-        mp.commandv("seek", -0.01, "keyframes", "exact")
-        mp.commandv("seek", 0.01, "keyframes", "exact")
-    end
 
     local newPosition = mp.get_property_number("time-pos")
 
@@ -402,7 +387,6 @@ function writeOut()
 
         strip_metadata ..
 
-        "-avoid_negative_ts", "make_zero",
         "-async", "1",
 
         destinationPath
